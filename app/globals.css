@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui;
+  --font-cursive: var(--font-andrea-bellarosa), "Brush Script MT", cursive;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
