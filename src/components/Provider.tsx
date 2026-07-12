@@ -1,10 +1,11 @@
 "use client";
 
-import { MantineProvider, createTheme, type InputProps } from "@mantine/core";
+import { createTheme, type InputProps, MantineProvider } from "@mantine/core";
 
 const errorColor = "var(--mantine-color-teal-7)";
 
 const theme = createTheme({
+  defaultRadius: 0,
   fontFamily: "var(--font-sans)",
   primaryColor: "gray",
   primaryShade: 9,

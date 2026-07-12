@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "@/components/Nav";
-import { sans, cursive } from "@/lib/fonts";
+import { cursive, sans } from "@/lib/fonts";
 import "@mantine/core/styles.css";
-import Provider from "@/components/Provider";
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
+import Provider from "@/components/Provider";
 
 export const metadata: Metadata = {
   title: "Kaitlyn & David",
@@ -27,9 +27,11 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col items-center py-10">
         <Provider>
-          <div className="pb-10 font-cursive text-4xl ">Kaitlyn + David</div>
+          <div className="pb-10 font-cursive text-4xl">Kaitlyn + David</div>
           <Nav />
-          <main className="pt-10 max-w-4xl">{children}</main>
+          <main className="pt-10 max-w-4xl px-5 w-full flex flex-col items-center">
+            {children}
+          </main>
         </Provider>
       </body>
     </html>
