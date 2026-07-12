@@ -50,6 +50,7 @@ export default function Page() {
   });
   const [record, setRecord] = useState<null | SearchResult>(null);
   const finalForm = useForm(getFinalForm());
+  const isLoading = status === "loading";
 
   const onSelect = (id: number) =>
     setRecord(results?.find((item) => item.id === id) ?? null);
@@ -272,7 +273,7 @@ export default function Page() {
                 <Button onClick={onStartOver} variant="outline">
                   Start Over
                 </Button>
-                <Button type="submit" loading={status === "loading"}>
+                <Button type="submit" loading={isLoading}>
                   Submit
                 </Button>
               </Group>

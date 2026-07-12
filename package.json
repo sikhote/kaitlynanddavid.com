@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
-    "fix": "biome format --write && biome check --write"
+    "fix": "biome format --write && biome check --write && npm run build"
   },
   "dependencies": {
     "@mantine/core": "^9.3.2",
