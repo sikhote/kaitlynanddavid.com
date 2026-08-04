@@ -87,7 +87,7 @@ export default function Page() {
       party: record?.names ? getPartyFields(record?.names) : {},
     });
     finalForm.clearErrors();
-  }, [finalForm, record]);
+  }, [finalForm.setValues, finalForm.clearErrors, record]);
 
   return (
     <div className="flex flex-col gap-10 items-center">
