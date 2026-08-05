@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Anchor, Text, Title } from "@mantine/core";
-import { events } from "@/lib/events";
+import { Anchor, Text, Title } from '@mantine/core';
+import { events } from '@/lib/events';
 
 export default function Page() {
   return (

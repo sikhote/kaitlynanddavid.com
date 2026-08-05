@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Button,
@@ -10,28 +10,28 @@ import {
   Text,
   TextInput,
   Title,
-} from "@mantine/core";
-import { useForm } from "@mantine/form";
-import MiniSearch, { type SearchResult } from "minisearch";
-import { useEffect, useMemo, useState } from "react";
-import { events } from "@/lib/events";
+} from '@mantine/core';
+import { useForm } from '@mantine/form';
+import MiniSearch, { type SearchResult } from 'minisearch';
+import { useEffect, useMemo, useState } from 'react';
+import { events } from '@/lib/events';
 import {
   getFinalForm,
   getFormFieldKey,
   getPartyFields,
   getSearchForm,
-} from "@/lib/forms";
-import { parties } from "@/lib/parties";
+} from '@/lib/forms';
+import { parties } from '@/lib/parties';
 
 export default function Page() {
   const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
+    'idle' | 'loading' | 'success' | 'error'
+  >('idle');
   const miniSearch = useMemo(() => {
     const items = parties.map((party, i) => ({ id: i, names: party }));
     const _miniSearch = new MiniSearch({
-      fields: ["names"],
-      storeFields: ["names", "id"],
+      fields: ['names'],
+      storeFields: ['names', 'id'],
     });
     _miniSearch.addAll(items);
     return _miniSearch;
@@ -39,7 +39,7 @@ export default function Page() {
   const searchForm = useForm(getSearchForm());
   const [results, setResults] = useState<null | SearchResult[]>(null);
   const onSearch = searchForm.onSubmit((values) => {
-    if (values?.name?.split(" ").length < 2) {
+    if (values?.name?.split(' ').length < 2) {
       setResults([]);
       return;
     }
@@ -50,35 +50,35 @@ export default function Page() {
   });
   const [record, setRecord] = useState<null | SearchResult>(null);
   const finalForm = useForm(getFinalForm());
-  const isLoading = status === "loading";
+  const isLoading = status === 'loading';
 
   const onSelect = (id: number) =>
     setRecord(results?.find((item) => item.id === id) ?? null);
   const onStartOver = () => {
     setRecord(null);
     setResults(null);
-    searchForm.setFieldValue("name", "");
-    setStatus("idle");
+    searchForm.setFieldValue('name', '');
+    setStatus('idle');
   };
   const onFinalSubmit = finalForm.onSubmit(async (values) => {
-    setStatus("loading");
+    setStatus('loading');
 
     try {
-      const res = await fetch("/api/rsvp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/rsvp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       });
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Failed to rsvp.");
+        throw new Error(data.error || 'Failed to rsvp.');
       }
 
       onStartOver();
-      setStatus("success");
+      setStatus('success');
     } catch (_) {
-      setStatus("error");
+      setStatus('error');
     }
   });
 
@@ -91,7 +91,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-col gap-10 items-center">
-      {status === "error" && (
+      {status === 'error' && (
         <div className="flex flex-col items-center">
           <Title order={2} ta="center">
             Sorry, there was an issue!
@@ -102,7 +102,7 @@ export default function Page() {
           </Text>
         </div>
       )}
-      {status === "success" && (
+      {status === 'success' && (
         <div className="flex flex-col items-center">
           <Title order={2} ta="center">
             Thank you!
@@ -116,7 +116,7 @@ export default function Page() {
           </Button>
         </div>
       )}
-      {status === "idle" && (
+      {status === 'idle' && (
         <>
           {!record && (
             <>
@@ -137,9 +137,9 @@ export default function Page() {
               >
                 <TextInput
                   aria-label="First and Last Name"
-                  key={searchForm.key("name")}
+                  key={searchForm.key('name')}
                   autoFocus
-                  {...searchForm.getInputProps("name")}
+                  {...searchForm.getInputProps('name')}
                   inputContainer={(children) => (
                     <>
                       {children}
@@ -189,9 +189,9 @@ export default function Page() {
               </Title>
               <TextInput
                 label="Email address"
-                key={finalForm.key("email")}
+                key={finalForm.key('email')}
                 autoFocus
-                {...finalForm.getInputProps("email")}
+                {...finalForm.getInputProps('email')}
                 maw={300}
                 w="100%"
                 inputContainer={(children) => (
@@ -229,7 +229,7 @@ export default function Page() {
                                       );
                                       return (
                                         <li key={key} className="w-[160px]">
-                                          {type === "Dinner option" && (
+                                          {type === 'Dinner option' && (
                                             <Select
                                               label="Select a dinner option"
                                               data={options}
@@ -237,7 +237,7 @@ export default function Page() {
                                               {...finalForm.getInputProps(key)}
                                             />
                                           )}
-                                          {type === "Will attend" && (
+                                          {type === 'Will attend' && (
                                             <Radio.Group
                                               key={finalForm.key(key)}
                                               {...finalForm.getInputProps(key)}

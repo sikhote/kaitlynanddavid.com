@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Nav from "@/components/Nav";
-import { cursive, sans } from "@/lib/fonts";
-import "@mantine/core/styles.css";
-import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
-import Provider from "@/components/Provider";
+import type { Metadata } from 'next';
+import './globals.css';
+import Layout from '@/components/Layout';
+import { cursive, sans } from '@/lib/fonts';
+import '@mantine/core/styles.css';
+import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
+import Provider from '@/components/Provider';
 
 export const metadata: Metadata = {
-  title: "Kaitlyn & David",
-  description: "The wedding website for Kaitlyn Holt & David Sinclair.",
+  title: 'Kaitlyn & David',
+  description: 'The wedding website for Kaitlyn Holt & David Sinclair.',
 };
 
 export default function RootLayout({
@@ -25,13 +25,9 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body className="min-h-full flex flex-col items-center py-10">
+      <body>
         <Provider>
-          <div className="pb-10 font-cursive text-4xl">Kaitlyn + David</div>
-          <Nav />
-          <main className="pt-10 max-w-4xl px-5 w-full flex flex-col items-center">
-            {children}
-          </main>
+          <Layout>{children}</Layout>
         </Provider>
       </body>
     </html>

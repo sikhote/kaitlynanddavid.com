@@ -1,8 +1,8 @@
-import type { FC, SVGProps } from "react";
+import type { FC, SVGProps } from 'react';
 
 export type EventQuestion =
-  | { type: "Will attend"; options?: never }
-  | { type: "Dinner option"; options: string[] };
+  | { type: 'Will attend'; options?: never }
+  | { type: 'Dinner option'; options: string[] };
 
 export type Event = {
   title: string;

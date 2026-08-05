@@ -1,19 +1,22 @@
-"use client";
+'use client';
 
-import { createTheme, type InputProps, MantineProvider } from "@mantine/core";
+import { createTheme, type InputProps, MantineProvider } from '@mantine/core';
 
-const errorColor = "var(--mantine-color-teal-7)";
+const errorColor = 'var(--mantine-color-teal-7)';
 
 const theme = createTheme({
   defaultRadius: 0,
-  fontFamily: "var(--font-sans)",
-  primaryColor: "gray",
+  fontFamily: 'var(--font-sans)',
+  primaryColor: 'gray',
   primaryShade: 9,
   components: {
     InputWrapper: {
       styles: {
         error: { color: errorColor },
       },
+      vars: () => ({
+        label: { '--input-asterisk-color': errorColor },
+      }),
     },
     Input: {
       styles: (_: never, props: InputProps) => ({
