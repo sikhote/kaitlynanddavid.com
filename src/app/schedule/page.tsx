@@ -1,13 +1,13 @@
 'use client';
 
-import { Anchor, Text, Title } from '@mantine/core';
+import { Anchor, Box, Stack, Text, Title } from '@mantine/core';
 import { events } from '@/lib/events';
 
 export default function Page() {
   return (
-    <div className="flex flex-col text-center gap-5">
+    <Stack align="center" gap="lg" ta="center">
       <Title order={2}>{events[0].date}</Title>
-      <ul className="flex flex-col gap-10">
+      <Stack component="ul" gap="xl">
         {events.map(
           ({
             title,
@@ -19,16 +19,16 @@ export default function Page() {
             website,
             Icon,
           }) => (
-            <li key={title} className="flex flex-col gap-3">
-              <div className="w-[80px] mx-auto mb-[-30px] mt-[-10px]">
+            <Stack component="li" key={title} gap="md" align="center">
+              <Box w="80px" mt="-10px" mb="-30px">
                 <Icon />
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <Title order={3}>{title}</Title>
                 <Text>{time}</Text>
                 {arrivalTime && <Text>{arrivalTime}</Text>}
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <Anchor underline="hover" href={website}>
                   <Title order={5}>{location}</Title>
                 </Anchor>
@@ -38,14 +38,14 @@ export default function Page() {
                 >
                   {address}
                 </Anchor>
-              </div>
-              <Text mx="auto" className="max-w-sm w-full" textWrap="balance">
+              </Box>
+              <Text maw={400} w="100%" textWrap="balance">
                 {description}
               </Text>
-            </li>
+            </Stack>
           ),
         )}
-      </ul>
-    </div>
+      </Stack>
+    </Stack>
   );
 }

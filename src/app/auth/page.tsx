@@ -1,10 +1,12 @@
 'use client';
 
-import { Button, Stack, TextInput } from '@mantine/core';
+import { Box, Button, Stack, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function Auth() {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const form = useForm({
     mode: 'controlled',
@@ -12,6 +14,8 @@ export default function Auth() {
     initialValues: { password: '' },
   });
   const onSubmit = form.onSubmit(async (values) => {
+    setIsLoading(true);
+
     const res = await fetch('/api/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -24,11 +28,13 @@ export default function Auth() {
     } else {
       form.setErrors({ password: 'Invalid password' });
     }
+
+    setIsLoading(false);
   });
 
   return (
-    <form onSubmit={onSubmit}>
-      <Stack gap="md" w="100%" miw={200}>
+    <Box component="form" onSubmit={onSubmit} maw={200} w="100%">
+      <Stack gap="md">
         <TextInput
           label="Password"
           autoFocus
@@ -36,10 +42,10 @@ export default function Auth() {
           {...form.getInputProps('password')}
           required
         />
-        <Button fullWidth type="submit">
+        <Button fullWidth type="submit" loading={isLoading}>
           Submit
         </Button>
       </Stack>
-    </form>
+    </Box>
   );
 }

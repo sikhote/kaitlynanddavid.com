@@ -7,6 +7,15 @@ const errorColor = 'var(--mantine-color-teal-7)';
 const theme = createTheme({
   defaultRadius: 0,
   fontFamily: 'var(--font-sans)',
+  headings: {
+    sizes: {
+      h1: {
+        fontWeight: '100',
+        fontSize: '3rem',
+        lineHeight: 'calc(3rem * 1.2)',
+      },
+    },
+  },
   primaryColor: 'gray',
   primaryShade: 9,
   components: {
