@@ -16,6 +16,9 @@ const theme = createTheme({
       },
     },
   },
+  spacing: {
+    xxs: '4px',
+  },
   primaryColor: 'gray',
   primaryShade: 9,
   components: {

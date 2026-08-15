@@ -1,16 +1,17 @@
 'use client';
 
-import { Button, Card, Flex, Stack, Text } from '@mantine/core';
+import { Button, Card, Grid, Stack, Text } from '@mantine/core';
 
 export default function Page() {
   return (
-    <Stack gap="xl" ta="center">
+    <Stack gap="xl" ta="center" align="center">
       <Text>Thanks for considering purchasing a gift for us!</Text>
-      <Flex gap="xl">
+      <Grid gap="xl" component="ul" w="100%" maw={400}>
         {[
           {
             title: 'Honeymoon Fund',
-            href: 'https://www.paypal.com/pool/9rKoiIW3yg?sr=wccr12588',
+            description: 'We are planning a trip to Italy next year',
+            href: 'https://paypal.me/kaitlynanddavid',
             linkLabel: 'Donate to Fund',
           },
           {
@@ -18,22 +19,29 @@ export default function Page() {
             href: 'https://www.crateandbarrel.com/gift-registry/kaitlyn-holt-and-david-sinclair/r7612588',
             linkLabel: 'View Registry',
           },
-        ].map(({ title, href, linkLabel }) => (
-          <Card shadow="sm" padding="lg" withBorder key={href} w={200}>
-            <Text fw={500}>{title}</Text>
-            <Button
-              component="a"
-              color="blue"
-              fullWidth
-              mt="md"
-              href={href}
-              target="_blank"
-            >
-              {linkLabel}
-            </Button>
-          </Card>
+          {
+            title: 'Pottery Barn',
+            href: 'https://www.potterybarn.com/registry/7kvpjzsqgz/registry-list.html',
+            linkLabel: 'View Registry',
+          },
+        ].map(({ title, description, href, linkLabel }, i) => (
+          <Grid.Col span={i === 0 ? 12 : 6} key={href}>
+            <Card component="li" shadow="sm" padding="lg" withBorder>
+              <Text fw={500}>{title}</Text>
+              {description && <Text>{description}</Text>}
+              <Button
+                component="a"
+                fullWidth
+                mt="md"
+                href={href}
+                target="_blank"
+              >
+                {linkLabel}
+              </Button>
+            </Card>
+          </Grid.Col>
         ))}
-      </Flex>
+      </Grid>
     </Stack>
   );
 }

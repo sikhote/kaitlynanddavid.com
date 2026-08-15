@@ -9,24 +9,16 @@ export default function Page() {
       <Title order={2}>{events[0].date}</Title>
       <Stack component="ul" gap="xl">
         {events.map(
-          ({
-            title,
-            description,
-            location,
-            address,
-            time,
-            arrivalTime,
-            website,
-            Icon,
-          }) => (
+          ({ title, description, location, address, times, website, Icon }) => (
             <Stack component="li" key={title} gap="md" align="center">
               <Box w="80px" mt="-10px" mb="-30px">
                 <Icon />
               </Box>
               <Box>
                 <Title order={3}>{title}</Title>
-                <Text>{time}</Text>
-                {arrivalTime && <Text>{arrivalTime}</Text>}
+                {times.map((time) => (
+                  <Text key={time}>{time}</Text>
+                ))}
               </Box>
               <Box>
                 <Anchor underline="hover" href={website}>

@@ -4,23 +4,10 @@ import WeddingIcon from '@/components/icons/WeddingIcon';
 import type { Event } from '@/lib/types';
 
 export const events: Event[] = [
-  // {
-  //   title: "Welcome Dinner",
-  //   date: "Monday, November 2, 2026",
-  //   time: "6:00 pm - 9:00 pm",
-  //   location: "Yanni's Bar & Grill",
-  //   website: "https://yannisbarandgrill.com",
-  //   address: "12015 Scripps Highlands Dr, San Diego, CA 92131",
-  //   questions: [{ type: "Will attend" }],
-  //   Icon: FamilyIcon,
-  //   description:
-  //     "Come join us for a casual dinner at a delicious mediterranean restaurant. Parking can be found in the restaurant's lot.",
-  // },
   {
     title: 'Ceremony',
     date: 'Tuesday, November 3, 2026',
-    time: '3:00 pm - 3:30 pm',
-    arrivalTime: 'Please arrive at 2:45 pm',
+    times: ['3:00 pm'],
     location: 'The Wedding Bowl (aka Cuvier Park)',
     website:
       'https://www.sandiego.gov/park-and-recreation/parks/regional/shoreline/cuvier',
@@ -28,12 +15,12 @@ export const events: Event[] = [
     questions: [{ type: 'Will attend' }],
     Icon: WeddingIcon,
     description:
-      'Our ceremony is next to the shores of La Jolla and will begin promptly. Parking is available along the nearby streets. It may be a little difficult to find a close spot.',
+      'Our ceremony will begin promptly at 3:00 pm. Please plan accordingly.',
   },
   {
     title: 'Reception',
     date: 'Tuesday, November 3, 2026',
-    time: '4:00 pm - 8:00 pm',
+    times: ['4:00 pm - Cocktail hour', '5:00 pm - Dinner'],
     location: 'The Marine Room',
     website: 'https://www.marineroom.com',
     address: '1950 Spindrift Dr, La Jolla, CA 92037',
@@ -46,6 +33,6 @@ export const events: Event[] = [
       },
     ],
     description:
-      "Join us for dinner and cake as we watch the waves roll in. Parking can be found in the restaurant's lot or surrounding streets.",
+      'Join us for cocktails, dinner, and cake as we watch the waves roll in.',
   },
 ];

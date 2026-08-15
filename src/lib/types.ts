@@ -7,8 +7,7 @@ export type EventQuestion =
 export type Event = {
   title: string;
   date: string;
-  time: string;
-  arrivalTime?: string;
+  times: string[];
   location: string;
   website: string;
   address: string;

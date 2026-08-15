@@ -13,7 +13,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import MiniSearch, { type SearchResult } from 'minisearch';
-import { useEffect, useMemo, useState } from 'react';
+import { type SubmitEventHandler, useEffect, useMemo, useState } from 'react';
 import { events } from '@/lib/events';
 import {
   getFinalForm,
@@ -90,68 +90,57 @@ export default function Page() {
   }, [finalForm.setValues, finalForm.clearErrors, record]);
 
   return (
-    <div className="flex flex-col gap-10 items-center">
+    <Stack gap="xxs" ta="center" align="center">
       {status === 'error' && (
-        <div className="flex flex-col items-center">
-          <Title order={2} ta="center">
-            Sorry, there was an issue!
-          </Title>
-          <Text maw={300} mt={10}>
-            If you are seeing this, please try back later or contact
-            david@sinclair.tech and let us know. Thanks!
+        <>
+          <Title order={2}>Sorry, there was an issue!</Title>
+          <Text maw={400}>
+            If you are seeing this message please email david@sinclair.tech or
+            text (858) 480-1781 to let us know.
           </Text>
-        </div>
+        </>
       )}
       {status === 'success' && (
-        <div className="flex flex-col items-center">
-          <Title order={2} ta="center">
-            Thank you!
-          </Title>
-          <Text maw={300} mt={10}>
-            We appreciate your response. Feel free to resubmit by September if
+        <>
+          <Title order={2}>Thank you!</Title>
+          <Text maw={400}>
+            We appreciate your response. Feel free to resubmit by October 1st if
             you would like to update any answers.
           </Text>
-          <Button onClick={onStartOver} variant="outline" mt={20}>
+          <Button onClick={onStartOver} mt="lg">
             Start Over
           </Button>
-        </div>
+        </>
       )}
-      {status === 'idle' && (
+      {['idle', 'loading'].includes(status) && (
         <>
           {!record && (
             <>
-              <Text
-                className="max-w-lg w-full"
-                textWrap="balance"
-                mx="auto"
-                ta="center"
-              >
+              <Text textWrap="balance" maw={600} w="100%">
                 If you're responding for you and a guest (or your family),
-                you'll be able to RSVP for your entire group on the next page.
-                Please enter the first and last name of one member of your party
-                below.
+                you'll be able to RSVP for your entire group. Please enter the
+                first and last name of one member of your party below.
               </Text>
-              <form
-                onSubmit={onSearch}
-                className="max-w-2xs w-full flex flex-col gap-2.5"
-              >
-                <TextInput
-                  aria-label="First and Last Name"
-                  key={searchForm.key('name')}
-                  autoFocus
-                  {...searchForm.getInputProps('name')}
-                  inputContainer={(children) => (
-                    <>
-                      {children}
-                      <Text size="xs" mt={2.5}>
-                        Ex. Sarah Fortune (not Dr. & Ms. Fortune)
-                      </Text>
-                    </>
-                  )}
-                />
-                <Button fullWidth type="submit">
-                  Search
-                </Button>
+              <form onSubmit={onSearch}>
+                <Stack className="max-w-2xs w-full flex flex-col gap-2.5">
+                  <TextInput
+                    aria-label="First and Last Name"
+                    key={searchForm.key('name')}
+                    autoFocus
+                    {...searchForm.getInputProps('name')}
+                    inputContainer={(children) => (
+                      <>
+                        {children}
+                        <Text size="xs" mt={2.5}>
+                          Ex. Sarah Fortune (not Dr. & Ms. Fortune)
+                        </Text>
+                      </>
+                    )}
+                  />
+                  <Button fullWidth type="submit">
+                    Search
+                  </Button>
+                </Stack>
               </form>
               <div className="max-w-2xs w-full">
                 {results !== null && results?.length === 0 && (
@@ -203,66 +192,58 @@ export default function Page() {
                   </>
                 )}
               />
-              <ul className="flex flex-col text-center gap-10 w-full">
-                {[[events[0]], [events[1], events[2]]].map((events) => (
-                  <li className="flex flex-col" key={events[0].title}>
-                    <Title order={4}>{events[0].date}</Title>
-                    <ul className="flex flex-col gap-10 mt-5">
-                      {events.map(({ title, time, questions }) => (
-                        <li key={title} className="flex flex-col gap-3">
-                          <div>
-                            <Title order={5}>{title}</Title>
-                            <Text>{time}</Text>
+              <Title order={4}>{events[0].date}</Title>
+              <ul className="flex flex-col gap-10 mt-5">
+                {events.map(({ title, times, questions }) => (
+                  <li key={title} className="flex flex-col gap-3">
+                    <div>
+                      <Title order={5}>{title}</Title>
+                      {times.map((time) => (
+                        <Text key={time}>{time}</Text>
+                      ))}
+                    </div>
+                    <ul className="flex flex-col text-left">
+                      {record.names.map((name: string, i: number) => (
+                        <li key={name}>
+                          {i === 0 && <Divider />}
+                          <div className="py-5 flex justify-between items-center">
+                            {name}
+                            <ul className="flex flex-col gap-5">
+                              {questions.map(({ type, options }) => {
+                                const key = getFormFieldKey(name, title, type);
+                                return (
+                                  <li key={key} className="w-[160px]">
+                                    {type === 'Dinner option' && (
+                                      <Select
+                                        label="Select a dinner option"
+                                        data={options}
+                                        key={finalForm.key(key)}
+                                        {...finalForm.getInputProps(key)}
+                                      />
+                                    )}
+                                    {type === 'Will attend' && (
+                                      <Radio.Group
+                                        key={finalForm.key(key)}
+                                        {...finalForm.getInputProps(key)}
+                                      >
+                                        <Stack gap={5}>
+                                          <Radio
+                                            label="Will attend"
+                                            value="Will attend"
+                                          />
+                                          <Radio
+                                            label="Will not attend"
+                                            value="Will not attend"
+                                          />
+                                        </Stack>
+                                      </Radio.Group>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
                           </div>
-                          <ul className="flex flex-col text-left">
-                            {record.names.map((name: string, i: number) => (
-                              <li key={name}>
-                                {i === 0 && <Divider />}
-                                <div className="py-5 flex justify-between items-center">
-                                  {name}
-                                  <ul className="flex flex-col gap-5">
-                                    {questions.map(({ type, options }) => {
-                                      const key = getFormFieldKey(
-                                        name,
-                                        title,
-                                        type,
-                                      );
-                                      return (
-                                        <li key={key} className="w-[160px]">
-                                          {type === 'Dinner option' && (
-                                            <Select
-                                              label="Select a dinner option"
-                                              data={options}
-                                              key={finalForm.key(key)}
-                                              {...finalForm.getInputProps(key)}
-                                            />
-                                          )}
-                                          {type === 'Will attend' && (
-                                            <Radio.Group
-                                              key={finalForm.key(key)}
-                                              {...finalForm.getInputProps(key)}
-                                            >
-                                              <Stack gap={5}>
-                                                <Radio
-                                                  label="Will attend"
-                                                  value="Will attend"
-                                                />
-                                                <Radio
-                                                  label="Will not attend"
-                                                  value="Will not attend"
-                                                />
-                                              </Stack>
-                                            </Radio.Group>
-                                          )}
-                                        </li>
-                                      );
-                                    })}
-                                  </ul>
-                                </div>
-                                <Divider />
-                              </li>
-                            ))}
-                          </ul>
+                          <Divider />
                         </li>
                       ))}
                     </ul>
@@ -281,6 +262,6 @@ export default function Page() {
           )}
         </>
       )}
-    </div>
+    </Stack>
   );
 }

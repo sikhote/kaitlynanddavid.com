@@ -8,8 +8,9 @@ export default function Page() {
       <li>
         <Title order={4}>What is the dress code?</Title>
         <Text textWrap="balance" maw={600} w="100%">
-          Cocktail attire! The wedding bowl has grass and can be quite windy, if
-          wearing heels you may want to consider a block shoe as well as layers.
+          Cocktail attire! The wedding bowl has grass—if wearing heels, you may
+          want to consider a block shoe. It can be windy near the shore and
+          layers may be helpful.
         </Text>
       </li>
       <li>
@@ -38,14 +39,6 @@ export default function Page() {
         <Title order={4}>When should I RSVP by?</Title>
         <Text textWrap="balance" maw={600} w="100%">
           October 1st!
-        </Text>
-      </li>
-      <li>
-        <Title order={4}>Are you registered? Where?</Title>
-        <Text textWrap="balance" maw={600} w="100%">
-          We are very fortunate with all that we have and do not expect any
-          gifts. If you do want to give a gift, consider a donation to honeymoon
-          fund!
         </Text>
       </li>
     </Stack>
