@@ -90,6 +90,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     [pathname],
   );
   const isHome = useMemo(() => page?.href === '/', [page]);
+  const isAuth = useMemo(() => pathname === '/auth', [pathname]);
 
   return (
     <Flex
@@ -107,39 +108,41 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Title {...andProps}>And</Title>
             <Title {...nameProps}>David</Title>
           </Flex>
-          <Burger
-            opened={opened}
-            onClick={toggle}
-            hiddenFrom="xs"
-            size="sm"
-            aria-label="Toggle navigation"
-            style={{ position: 'relative' }}
-            top={3}
-            ml="md"
-          />
+          {!isAuth && (
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="xs"
+              size="sm"
+              aria-label="Toggle navigation"
+              style={{ position: 'relative' }}
+              top={3}
+              ml="md"
+            />
+          )}
         </Flex>
-        <Drawer
-          opened={opened}
-          onClose={close}
-          size="100%"
-          padding="md"
-          hiddenFrom="xs"
-          zIndex={1000000}
-        >
-          <Flex
-            component="ul"
-            top={0}
-            pt="md"
-            pl="sm"
-            style={{ position: 'absolute', zIndex: 1001 }}
-            direction="column"
-            gap="sm"
-          >
-            {items}
-          </Flex>
-        </Drawer>
-        {pathname !== '/auth' && (
+        {!isAuth && (
           <>
+            <Drawer
+              opened={opened}
+              onClose={close}
+              size="100%"
+              padding="md"
+              hiddenFrom="xs"
+              zIndex={1000000}
+            >
+              <Flex
+                component="ul"
+                top={0}
+                pt="md"
+                pl="sm"
+                style={{ position: 'absolute', zIndex: 1001 }}
+                direction="column"
+                gap="sm"
+              >
+                {items}
+              </Flex>
+            </Drawer>
             <Box
               component="nav"
               visibleFrom="xs"
