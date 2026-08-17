@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Flex, Text, Title } from "@mantine/core";
+import { Flex, Text, Title } from '@mantine/core';
 
 export default function Page() {
   return (
     <Flex
       component="ul"
       direction="column"
-      gap={{ base: "xl" }}
-      pt={{ base: "lg" }}
+      gap={{ base: 'xl' }}
+      pt={{ base: 'lg' }}
       align="center"
       ta="center"
     >
