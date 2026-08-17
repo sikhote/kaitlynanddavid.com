@@ -16,7 +16,7 @@ export default function Page() {
           {
             title: 'Honeymoon Fund',
             description:
-              "We've added a Honeymoon Fund to our registry as we get ready for our first big adventure post wedding - a trip to Italy, a place neither of us has explored before. If you'd like you can help us make the most of our trip with unforgettable dinners and moments of discovery as we travel across the country. Thank you for helping us build memories we'll treasure forever.",
+              "We've added a Honeymoon Fund to our registry as we get ready for our first big adventure post wedding - a trip to Italy, a place neither of us has explored before. If you'd like you can help us make the most of our trip with unforgettable dinners and moments of discovery as we travel across the country. Thank you for helping us create memories we'll treasure forever.",
             href: 'https://paypal.me/kaitlynanddavid',
             linkLabel: 'Donate to Fund',
           },
