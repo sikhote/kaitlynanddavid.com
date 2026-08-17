@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Layout from '@/components/Layout';
-import { cursive, sans } from '@/lib/fonts';
+import { cursive, sans, sans2 } from '@/lib/fonts';
 import '@mantine/core/styles.css';
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 import Provider from '@/components/Provider';
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${cursive.variable} h-full antialiased`}
+      className={`${sans.variable} ${sans2.variable} ${cursive.variable} h-full antialiased`}
       {...mantineHtmlProps}
     >
       <head>

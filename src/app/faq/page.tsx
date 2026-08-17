@@ -1,16 +1,35 @@
 'use client';
 
-import { Stack, Text, Title } from '@mantine/core';
+import { Flex, Text, Title } from '@mantine/core';
 
 export default function Page() {
   return (
-    <Stack component="ul" gap="xl" align="center" ta="center">
+    <Flex
+      component="ul"
+      direction="column"
+      gap={{ base: 'xl' }}
+      pt={{ base: 'lg' }}
+      align="center"
+      ta="center"
+    >
       <li>
-        <Title order={4}>What is the dress code?</Title>
+        <Title order={4}>What is the attire for the wedding?</Title>
         <Text textWrap="balance" maw={600} w="100%">
-          Cocktail attire! The wedding bowl has grass—if wearing heels, you may
-          want to consider a block shoe. It can be windy near the shore and
-          layers may be helpful.
+          Cocktail! We’d love to see our family and friends dress up with us.
+        </Text>
+      </li>
+      <li>
+        <Title order={4}>Is the wedding outdoors?</Title>
+        <Text textWrap="balance" maw={600} w="100%">
+          Our ceremony will take place on a grassy lawn near La Jolla shores.
+          Cocktail hour and dinner will be indoors.
+        </Text>
+      </li>
+      <li>
+        <Title order={4}>How's the weather in early November?</Title>
+        <Text textWrap="balance" maw={600} w="100%">
+          Typically, daytime highs range from the mid-60s to low 70s°F, dropping
+          into the low-to-mid 50s°F at night.
         </Text>
       </li>
       <li>
@@ -22,17 +41,18 @@ export default function Page() {
         </Text>
       </li>
       <li>
-        <Title order={4}>What is the suggested parking?</Title>
+        <Title order={4}>Where should I park?</Title>
         <Text textWrap="balance" maw={600} w="100%">
-          In general, parking in La Jolla can be limited. Consider carpooling or
-          using rideshare if available.
-        </Text>
-      </li>
-      <li>
-        <Title order={4}>Do I get a plus one?</Title>
-        <Text textWrap="balance" maw={600} w="100%">
-          To keep our wedding as small and intimate as possible, only guests
-          named on your invitation are invited!
+          For our ceremony at the wedding bowl you can park in the surrounding
+          streets. It shouldn’t be too busy on a Tuesday afternoon but it is
+          near the beach and parking can be limited. You may need to walk a
+          block or two.
+          <br />
+          <br />
+          For cocktail hour and dinner at the Marine Room there is a small lot
+          in front of the restaurant with available parking. Additional parking
+          can be found in the surrounding streets. We recommend carpooling when
+          possible.
         </Text>
       </li>
       <li>
@@ -41,6 +61,6 @@ export default function Page() {
           October 1st!
         </Text>
       </li>
-    </Stack>
+    </Flex>
   );
 }

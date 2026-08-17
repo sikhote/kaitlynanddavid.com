@@ -1,20 +1,22 @@
 'use client';
 
 import {
+  Box,
   Button,
   Divider,
-  Group,
+  Flex,
+  Paper,
   Radio,
   Select,
-  Stack,
   Text,
   TextInput,
   Title,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import MiniSearch, { type SearchResult } from 'minisearch';
-import { type SubmitEventHandler, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { events } from '@/lib/events';
+import { h2Props } from '@/lib/fonts';
 import {
   getFinalForm,
   getFormFieldKey,
@@ -89,21 +91,43 @@ export default function Page() {
     finalForm.clearErrors();
   }, [finalForm.setValues, finalForm.clearErrors, record]);
 
+  // useEffect(() => {
+  //   searchForm.setFieldValue('name', 'Kathryn Holt');
+  //   onSearch();
+  // }, []);
+  // useEffect(() => {
+  //   if (results) {
+  //     setRecord(results[0]);
+  //   }
+  // }, [results]);
+
   return (
-    <Stack gap="xxs" ta="center" align="center">
+    <Flex direction="column" ta="center" align="center" w="100%">
       {status === 'error' && (
         <>
-          <Title order={2}>Sorry, there was an issue!</Title>
-          <Text maw={400}>
-            If you are seeing this message please email david@sinclair.tech or
-            text (858) 480-1781 to let us know.
+          <Title
+            pt={{ base: '64' }}
+            order={3}
+            style={{ fontFamily: 'var(--font-cursive)' }}
+          >
+            Sorry!
+          </Title>
+          <Text maw={600} textWrap="balance" mt={{ base: 'lg' }}>
+            If you are seeing this message, please email david@sinclair.tech or
+            text (858) 480-1781.
           </Text>
         </>
       )}
       {status === 'success' && (
         <>
-          <Title order={2}>Thank you!</Title>
-          <Text maw={400}>
+          <Title
+            pt={{ base: '64' }}
+            order={3}
+            style={{ fontFamily: 'var(--font-cursive)' }}
+          >
+            Thank you!
+          </Title>
+          <Text maw={600} textWrap="balance" mt={{ base: 'lg' }}>
             We appreciate your response. Feel free to resubmit by October 1st if
             you would like to update any answers.
           </Text>
@@ -121,9 +145,18 @@ export default function Page() {
                 you'll be able to RSVP for your entire group. Please enter the
                 first and last name of one member of your party below.
               </Text>
-              <form onSubmit={onSearch}>
-                <Stack className="max-w-2xs w-full flex flex-col gap-2.5">
+              <form onSubmit={onSearch} style={{ width: '100%' }}>
+                <Flex
+                  direction="column"
+                  maw={400}
+                  w="100%"
+                  gap={{ base: 'md' }}
+                  align="stretch"
+                  mx="auto"
+                  mt={{ base: 'xl' }}
+                >
                   <TextInput
+                    w="100%"
                     aria-label="First and Last Name"
                     key={searchForm.key('name')}
                     autoFocus
@@ -131,7 +164,7 @@ export default function Page() {
                     inputContainer={(children) => (
                       <>
                         {children}
-                        <Text size="xs" mt={2.5}>
+                        <Text size="xs" mt={2.5} ta="left">
                           Ex. Sarah Fortune (not Dr. & Ms. Fortune)
                         </Text>
                       </>
@@ -140,128 +173,184 @@ export default function Page() {
                   <Button fullWidth type="submit">
                     Search
                   </Button>
-                </Stack>
+                </Flex>
               </form>
-              <div className="max-w-2xs w-full">
+              <Box maw={400} w="100%" mt={{ base: 'xl' }}>
                 {results !== null && results?.length === 0 && (
-                  <p>No results found, please try again.</p>
+                  <Text>No results found, please try again.</Text>
                 )}
                 {results !== null && results?.length > 0 && (
-                  <ul className="[&>*:nth-child(n+2)]:mt-5">
+                  <Flex component="ul" direction="column" gap={{ base: 'md' }}>
                     {results.map((item) => (
-                      <li
+                      <Paper
+                        component="li"
                         key={item.id}
-                        className="flex justify-between items-center border border-gray-300 p-5"
+                        withBorder
+                        p={{ base: 'md' }}
                       >
-                        <div>
-                          {item.names.map((name: string) => (
-                            <Text key={name}>{name}</Text>
-                          ))}
-                        </div>
-                        <Button onClick={() => onSelect(item.id)}>
-                          Select
-                        </Button>
-                      </li>
+                        <Flex align="center" justify="space-between">
+                          <Text ta="left">
+                            {item.names.map((name: string) => (
+                              <span key={name}>
+                                {name}
+                                <br />
+                              </span>
+                            ))}
+                          </Text>
+                          <Button onClick={() => onSelect(item.id)}>
+                            Select
+                          </Button>
+                        </Flex>
+                      </Paper>
                     ))}
-                  </ul>
+                  </Flex>
                 )}
-              </div>
+              </Box>
             </>
           )}
           {record && (
-            <form
-              onSubmit={onFinalSubmit}
-              className="max-w-sm w-full flex flex-col items-center gap-10"
-            >
-              <Title order={2} ta="center">
-                Please fill out all fields
-              </Title>
-              <TextInput
-                label="Email address"
-                key={finalForm.key('email')}
-                autoFocus
-                {...finalForm.getInputProps('email')}
-                maw={300}
-                w="100%"
-                inputContainer={(children) => (
-                  <>
-                    {children}
-                    <Text size="xs" mt={2.5}>
-                      This will be used to contact the party with updates
-                    </Text>
-                  </>
-                )}
-              />
-              <Title order={4}>{events[0].date}</Title>
-              <ul className="flex flex-col gap-10 mt-5">
-                {events.map(({ title, times, questions }) => (
-                  <li key={title} className="flex flex-col gap-3">
-                    <div>
-                      <Title order={5}>{title}</Title>
-                      {times.map((time) => (
-                        <Text key={time}>{time}</Text>
-                      ))}
-                    </div>
-                    <ul className="flex flex-col text-left">
-                      {record.names.map((name: string, i: number) => (
-                        <li key={name}>
-                          {i === 0 && <Divider />}
-                          <div className="py-5 flex justify-between items-center">
-                            {name}
-                            <ul className="flex flex-col gap-5">
-                              {questions.map(({ type, options }) => {
-                                const key = getFormFieldKey(name, title, type);
-                                return (
-                                  <li key={key} className="w-[160px]">
-                                    {type === 'Dinner option' && (
-                                      <Select
-                                        label="Select a dinner option"
-                                        data={options}
-                                        key={finalForm.key(key)}
-                                        {...finalForm.getInputProps(key)}
-                                      />
-                                    )}
-                                    {type === 'Will attend' && (
-                                      <Radio.Group
-                                        key={finalForm.key(key)}
-                                        {...finalForm.getInputProps(key)}
-                                      >
-                                        <Stack gap={5}>
-                                          <Radio
-                                            label="Will attend"
-                                            value="Will attend"
-                                          />
-                                          <Radio
-                                            label="Will not attend"
-                                            value="Will not attend"
-                                          />
-                                        </Stack>
-                                      </Radio.Group>
-                                    )}
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          </div>
-                          <Divider />
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ul>
-              <Group justify="center">
-                <Button onClick={onStartOver} variant="outline">
-                  Start Over
-                </Button>
-                <Button type="submit" loading={isLoading}>
-                  Submit
-                </Button>
-              </Group>
+            <form onSubmit={onFinalSubmit} style={{ width: '100%' }}>
+              <Flex direction="column" gap={{ base: 'lg' }} mx="auto">
+                <Title {...h2Props}>{events[0].date}</Title>
+                <Title order={4}>Please fill out all fields</Title>
+                <Flex
+                  direction="column"
+                  component="ul"
+                  gap={{ base: '64' }}
+                  pt={{ base: 'lg' }}
+                >
+                  {events.map(({ title, times, questions }) => (
+                    <Flex direction="column" key={title} component="li">
+                      <Title
+                        order={3}
+                        style={{ fontFamily: 'var(--font-cursive)' }}
+                      >
+                        {title}
+                      </Title>
+                      <Text mt={{ base: 'md' }}>
+                        {times.map((time) => (
+                          <span key={time}>
+                            {time}
+                            <br />
+                          </span>
+                        ))}
+                      </Text>
+                      <Flex
+                        component="ul"
+                        direction="column"
+                        pt={{ base: 'md' }}
+                      >
+                        {record.names.map((name: string, i: number) => (
+                          <Flex component="li" direction="column" key={name}>
+                            {i === 0 && (
+                              <Divider
+                                style={{ alignSelf: 'center' }}
+                                maw={400}
+                                w="100%"
+                              />
+                            )}
+                            <Flex
+                              py={{ base: 'sm' }}
+                              justify="space-between"
+                              style={{ alignSelf: 'center' }}
+                              maw={400}
+                              w="100%"
+                              align="center"
+                            >
+                              {name}
+                              <Flex
+                                component="ul"
+                                direction="column"
+                                className="flex flex-col gap-5"
+                              >
+                                {questions.map(({ type, options }) => {
+                                  const key = getFormFieldKey(
+                                    name,
+                                    title,
+                                    type,
+                                  );
+                                  return (
+                                    <li key={key} className="w-[160px]">
+                                      {type === 'Dinner option' && (
+                                        <Select
+                                          label="Select a dinner option"
+                                          data={options}
+                                          key={finalForm.key(key)}
+                                          {...finalForm.getInputProps(key)}
+                                        />
+                                      )}
+                                      {type === 'Will attend' && (
+                                        <Radio.Group
+                                          key={finalForm.key(key)}
+                                          {...finalForm.getInputProps(key)}
+                                        >
+                                          <Flex
+                                            direction="column"
+                                            gap={{ base: 'xxs' }}
+                                          >
+                                            <Radio
+                                              label="Will attend"
+                                              value="Will attend"
+                                            />
+                                            <Radio
+                                              label="Will not attend"
+                                              value="Will not attend"
+                                            />
+                                          </Flex>
+                                        </Radio.Group>
+                                      )}
+                                    </li>
+                                  );
+                                })}
+                              </Flex>
+                            </Flex>
+                            <Divider
+                              style={{ alignSelf: 'center' }}
+                              maw={400}
+                              w="100%"
+                            />
+                          </Flex>
+                        ))}
+                      </Flex>
+                    </Flex>
+                  ))}
+                </Flex>
+                <TextInput
+                  ta="left"
+                  label="Email address"
+                  key={finalForm.key('email')}
+                  {...finalForm.getInputProps('email')}
+                  maw={400}
+                  w="100%"
+                  style={{ alignSelf: 'center' }}
+                  inputContainer={(children) => (
+                    <>
+                      {children}
+                      <Text size="xs" mt={2.5}>
+                        This will be used to contact the party with updates
+                      </Text>
+                    </>
+                  )}
+                />
+                <Flex
+                  gap={{ base: 'md' }}
+                  justify="center"
+                  maw={400}
+                  w="100%"
+                  style={{ alignSelf: 'center' }}
+                >
+                  <Button onClick={onStartOver} variant="outline" flex="auto">
+                    Start Over
+                  </Button>
+                  <Button type="submit" loading={isLoading} flex="auto">
+                    Submit
+                  </Button>
+                </Flex>
+              </Flex>
             </form>
           )}
         </>
       )}
-    </Stack>
+    </Flex>
   );
 }

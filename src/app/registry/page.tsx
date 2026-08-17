@@ -1,12 +1,12 @@
 'use client';
 
-import { Button, Card, Grid, Stack, Text } from '@mantine/core';
+import { Box, Button, Flex, Grid, Paper, Text, Title } from '@mantine/core';
 
 export default function Page() {
   return (
-    <Stack gap="xl" ta="center" align="center">
-      <Text>Thanks for considering purchasing a gift for us!</Text>
-      <Grid gap="xl" component="ul" w="100%" maw={400}>
+    <Flex gap={{ base: 'xl' }} direction="column" ta="center" align="center">
+      <Text>Thanks for considering a gift for us!</Text>
+      <Grid gap={{ base: 'xl' }} component="ul" w="100%" maw={400}>
         {[
           {
             title: 'Honeymoon Fund',
@@ -26,22 +26,18 @@ export default function Page() {
           },
         ].map(({ title, description, href, linkLabel }, i) => (
           <Grid.Col span={i === 0 ? 12 : 6} key={href}>
-            <Card component="li" shadow="sm" padding="lg" withBorder>
-              <Text fw={500}>{title}</Text>
-              {description && <Text>{description}</Text>}
-              <Button
-                component="a"
-                fullWidth
-                mt="md"
-                href={href}
-                target="_blank"
-              >
+            <Paper component="li" withBorder>
+              <Box p="lg">
+                <Title order={4}>{title}</Title>
+                {description && <Text>{description}</Text>}
+              </Box>
+              <Button component="a" fullWidth href={href} target="_blank">
                 {linkLabel}
               </Button>
-            </Card>
+            </Paper>
           </Grid.Col>
         ))}
       </Grid>
-    </Stack>
+    </Flex>
   );
 }

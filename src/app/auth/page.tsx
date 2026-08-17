@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Stack, TextInput } from '@mantine/core';
+import { Box, Button, Flex, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -34,7 +34,7 @@ export default function Auth() {
 
   return (
     <Box component="form" onSubmit={onSubmit} maw={200} w="100%">
-      <Stack gap="md">
+      <Flex direction="column" gap={{ base: 'md' }}>
         <TextInput
           label="Password"
           autoFocus
@@ -45,7 +45,7 @@ export default function Auth() {
         <Button fullWidth type="submit" loading={isLoading}>
           Submit
         </Button>
-      </Stack>
+      </Flex>
     </Box>
   );
 }

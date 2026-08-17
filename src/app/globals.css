@@ -8,8 +8,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-jost), ui-sans-serif, system-ui;
-  --font-cursive: var(--font-andrea-bellarosa), "Brush Script MT", cursive;
+  --font-sans: var(--font-cormorant), ui-sans-serif, system-ui;
+  --font-sans2: var(--font-aire-bold-pro), ui-sans-serif, system-ui;
+  --font-cursive: var(--font-floral-hearts), "Brush Script MT", cursive;
 }
 
 body {

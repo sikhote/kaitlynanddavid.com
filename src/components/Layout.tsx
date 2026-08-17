@@ -6,15 +6,16 @@ import {
   Burger,
   Divider,
   Drawer,
-  Group,
-  Stack,
+  Flex,
   Text,
   Title,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
+import { sans2Props } from '@/lib/fonts';
 
 const pages = [
   {
@@ -40,7 +41,24 @@ const pages = [
   },
 ];
 
-export default function Nav({ children }: { children: React.ReactNode }) {
+const nameProps = {
+  ...sans2Props,
+  lts: 8,
+  component: 'span',
+  order: 1 as const,
+  fz: { base: '5rem' },
+};
+
+const andProps = {
+  component: 'span',
+  order: 1 as const,
+  fz: { base: '2rem' },
+  style: { fontFamily: 'var(--font-cursive)', position: 'relative' as const },
+  top: 1 as const,
+  mr: 12 as const,
+};
+
+export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [opened, { toggle, close }] = useDisclosure(false);
   const items = useMemo(
@@ -48,12 +66,12 @@ export default function Nav({ children }: { children: React.ReactNode }) {
       pages.map(({ href, label }) => (
         <li key={href}>
           <Anchor
-            c={pathname === href ? 'gray.9' : 'gray.6'}
             component={Link}
             href={href}
             onClick={close}
+            underline={pathname === href ? 'always' : 'hover'}
           >
-            <Text component="span" fz="lg">
+            <Text component="span" fz="lg" tt="uppercase" lts={4}>
               {label}
             </Text>
           </Anchor>
@@ -68,29 +86,21 @@ export default function Nav({ children }: { children: React.ReactNode }) {
   const isHome = useMemo(() => page?.href === '/', [page]);
 
   return (
-    <Stack
+    <Flex
       mih="100%"
       align="center"
-      pt={{ base: 12, sm: 12, md: 48, lg: 48 }}
-      pb={{ base: 24, sm: 24, md: 48, lg: 48 }}
-      gap={0}
+      pt={{ base: 32, sm: 32, md: 48, lg: 64 }}
+      pb={64}
       justify="flex-start"
+      direction="column"
     >
-      <Stack component="header" w="100%" align="center" gap={0}>
-        <Group
-          justify="center"
-          align="center"
-          gap="xl"
-          pb={{ base: 0, sm: 0, md: 'lg', lg: 'xl' }}
-        >
-          <Title
-            component="div"
-            order={1}
-            fz={{ base: '1.75rem', sm: '2rem', md: '2.5rem', lg: '3rem' }}
-            style={{ fontFamily: 'var(--font-cursive)' }}
-          >
-            Kaitlyn + David
-          </Title>
+      <Flex component="header" w="100%" align="center" direction="column">
+        <Flex justify="center" align="center">
+          <Flex justify="center" align="center" gap={{ base: 'md' }} mb={-12}>
+            <Title {...nameProps}>Kaitlyn</Title>
+            <Title {...andProps}>And</Title>
+            <Title {...nameProps}>David</Title>
+          </Flex>
           <Burger
             opened={opened}
             onClick={toggle}
@@ -99,17 +109,7 @@ export default function Nav({ children }: { children: React.ReactNode }) {
             aria-label="Toggle navigation"
             style={{ top: '5px', position: 'relative' }}
           />
-        </Group>
-        {pathname !== '/auth' && (
-          <>
-            <Box visibleFrom="xs" component="nav" pt="md">
-              <Group component="ul" gap="xl">
-                {items}
-              </Group>
-            </Box>
-            <Divider my="md" w="100%" maw={800} />
-          </>
-        )}
+        </Flex>
         <Drawer
           opened={opened}
           onClose={close}
@@ -118,29 +118,70 @@ export default function Nav({ children }: { children: React.ReactNode }) {
           hiddenFrom="xs"
           zIndex={1000000}
         >
-          <Stack
+          <Flex
             component="ul"
-            gap="md"
             top={0}
             pt="md"
             style={{ position: 'absolute', zIndex: 1001 }}
+            direction="column"
           >
             {items}
-          </Stack>
+          </Flex>
         </Drawer>
-      </Stack>
-      <Stack component="main" maw={800} w="100%" align="center" pt="lg" px="md">
+        {pathname !== '/auth' && (
+          <>
+            <Box component="nav" visibleFrom="xs" mt={{ base: 'lg' }}>
+              <Flex component="ul" gap={{ base: 'lg' }}>
+                {items}
+              </Flex>
+            </Box>
+            <Flex
+              align="center"
+              w="100%"
+              maw={800}
+              gap={{ base: 'lg' }}
+              mt={{ base: 32 }}
+            >
+              <Divider style={{ flex: 'auto' }} />
+              <Box
+                w={{ base: 30 }}
+                h={{ base: 45 }}
+                style={{ position: 'relative', flex: 'none' }}
+              >
+                <Image
+                  src="/assets/motif.webp"
+                  alt="Botanical Motif"
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  sizes="30px"
+                />
+              </Box>
+              <Divider style={{ flex: 'auto' }} />
+            </Flex>
+          </>
+        )}
+      </Flex>
+      <Flex
+        component="main"
+        maw={800}
+        w="100%"
+        align="center"
+        px="md"
+        pt={32}
+        direction="column"
+      >
         {page && (
           <Title
-            {...(isHome ? { order: 1, fz: 24, lh: 1.5, fw: '200' } : {})}
-            order={1}
             ta="center"
+            {...(isHome
+              ? { order: 2, pb: { base: 'sm' }, fw: 800 }
+              : { order: 1, ...sans2Props })}
           >
             {page.title || page.label}
           </Title>
         )}
         {children}
-      </Stack>
-    </Stack>
+      </Flex>
+    </Flex>
   );
 }

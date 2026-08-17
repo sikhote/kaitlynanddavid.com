@@ -1,43 +1,47 @@
 'use client';
 
-import { Anchor, Box, Stack, Text, Title } from '@mantine/core';
+import { Anchor, Box, Flex, Text, Title } from '@mantine/core';
 import { events } from '@/lib/events';
+import { h2Props } from '@/lib/fonts';
 
 export default function Page() {
   return (
-    <Stack align="center" gap="lg" ta="center">
-      <Title order={2}>{events[0].date}</Title>
-      <Stack component="ul" gap="xl">
+    <>
+      <Title {...h2Props}>{events[0].date}</Title>
+      <Flex direction="column" component="ul" gap={{ base: 48 }} ta="center">
         {events.map(
           ({ title, description, location, address, times, website, Icon }) => (
-            <Stack component="li" key={title} gap="md" align="center">
-              <Box w="80px" mt="-10px" mb="-30px">
+            <Flex component="li" direction="column" key={title} align="center">
+              <Box w={80}>
                 <Icon />
               </Box>
-              <Box>
-                <Title order={3}>{title}</Title>
+              <Title order={3} style={{ fontFamily: 'var(--font-cursive)' }}>
+                {title}
+              </Title>
+              <Anchor underline="hover" href={website} mt={{ base: 'xl' }}>
+                <Title order={4}>{location}</Title>
+              </Anchor>
+              <Text>
                 {times.map((time) => (
-                  <Text key={time}>{time}</Text>
+                  <span key={time}>
+                    {time}
+                    <br />
+                  </span>
                 ))}
-              </Box>
-              <Box>
-                <Anchor underline="hover" href={website}>
-                  <Title order={5}>{location}</Title>
-                </Anchor>
-                <Anchor
-                  underline="always"
-                  href={`https://www.google.com/maps/search/?api=1&query=${address}`}
-                >
-                  {address}
-                </Anchor>
-              </Box>
-              <Text maw={400} w="100%" textWrap="balance">
+              </Text>
+              <Anchor
+                underline="always"
+                href={`https://www.google.com/maps/search/?api=1&query=${address}`}
+              >
+                {address}
+              </Anchor>
+              <Text maw={400} w="100%" textWrap="balance" mt={{ base: 'md' }}>
                 {description}
               </Text>
-            </Stack>
+            </Flex>
           ),
         )}
-      </Stack>
-    </Stack>
+      </Flex>
+    </>
   );
 }

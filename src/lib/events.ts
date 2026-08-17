@@ -15,7 +15,7 @@ export const events: Event[] = [
     questions: [{ type: 'Will attend' }],
     Icon: WeddingIcon,
     description:
-      'Our ceremony will begin promptly at 3:00 pm. Please plan accordingly.',
+      'Our ceremony will begin promptly at 3:00 pm. Please arrive early so we can start on time.',
   },
   {
     title: 'Reception',
