@@ -23,6 +23,8 @@ export default function RootLayout({
       {...mantineHtmlProps}
     >
       <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <ColorSchemeScript />
       </head>
       <body>

@@ -15,7 +15,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
-import { sans2Props } from '@/lib/fonts';
+import { h1Props, sans2Props } from '@/lib/fonts';
 
 const pages = [
   {
@@ -43,19 +43,20 @@ const pages = [
 
 const nameProps = {
   ...sans2Props,
-  lts: 8,
+  lts: { base: 4, xs: 6, sm: 8 },
   component: 'span',
   order: 1 as const,
-  fz: { base: '5rem' },
+  fz: { base: '1.8rem', xs: '3rem', sm: '5rem' },
 };
 
 const andProps = {
   component: 'span',
   order: 1 as const,
-  fz: { base: '2rem' },
+  fz: { base: '.7rem', xs: '1rem', sm: '2rem' },
   style: { fontFamily: 'var(--font-cursive)', position: 'relative' as const },
   top: 1 as const,
-  mr: 12 as const,
+  mr: { base: 16, xs: 24, sm: 34 } as const,
+  ml: { base: 8, xs: 12, sm: 22 } as const,
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -71,7 +72,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             onClick={close}
             underline={pathname === href ? 'always' : 'hover'}
           >
-            <Text component="span" fz="lg" tt="uppercase" lts={4}>
+            <Text
+              component="span"
+              fz={{ base: 'md', xs: 'md', sm: 'lg' }}
+              tt="uppercase"
+              lts={4}
+            >
               {label}
             </Text>
           </Anchor>
@@ -89,14 +95,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <Flex
       mih="100%"
       align="center"
-      pt={{ base: 32, sm: 32, md: 48, lg: 64 }}
+      pt={{ base: 12, xs: 48, sm: 64 }}
       pb={64}
       justify="flex-start"
       direction="column"
     >
       <Flex component="header" w="100%" align="center" direction="column">
         <Flex justify="center" align="center">
-          <Flex justify="center" align="center" gap={{ base: 'md' }} mb={-12}>
+          <Flex justify="center" align="center" mb={-12}>
             <Title {...nameProps}>Kaitlyn</Title>
             <Title {...andProps}>And</Title>
             <Title {...nameProps}>David</Title>
@@ -107,7 +113,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             hiddenFrom="xs"
             size="sm"
             aria-label="Toggle navigation"
-            style={{ top: '5px', position: 'relative' }}
+            style={{ position: 'relative' }}
+            top={3}
+            ml="md"
           />
         </Flex>
         <Drawer
@@ -122,15 +130,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             component="ul"
             top={0}
             pt="md"
+            pl="sm"
             style={{ position: 'absolute', zIndex: 1001 }}
             direction="column"
+            gap="sm"
           >
             {items}
           </Flex>
         </Drawer>
         {pathname !== '/auth' && (
           <>
-            <Box component="nav" visibleFrom="xs" mt={{ base: 'lg' }}>
+            <Box
+              component="nav"
+              visibleFrom="xs"
+              mt={{ base: 'md', xs: 'sm', sm: 'lg' }}
+            >
               <Flex component="ul" gap={{ base: 'lg' }}>
                 {items}
               </Flex>
@@ -140,12 +154,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               w="100%"
               maw={800}
               gap={{ base: 'lg' }}
-              mt={{ base: 32 }}
+              mt={{ base: 'md', xs: 'md', sm: 'xl' }}
             >
               <Divider style={{ flex: 'auto' }} />
               <Box
-                w={{ base: 30 }}
-                h={{ base: 45 }}
+                w={{ base: 20, xs: 30, sm: 30 }}
+                h={{ base: 35, xs: 45, sm: 45 }}
                 style={{ position: 'relative', flex: 'none' }}
               >
                 <Image
@@ -167,7 +181,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         w="100%"
         align="center"
         px="md"
-        pt={32}
+        pt={{ base: 'sm', xs: 'lg', sm: 'xl' }}
         direction="column"
       >
         {page && (
@@ -175,7 +189,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             ta="center"
             {...(isHome
               ? { order: 2, pb: { base: 'sm' }, fw: 800 }
-              : { order: 1, ...sans2Props })}
+              : { ...sans2Props, ...h1Props })}
           >
             {page.title || page.label}
           </Title>

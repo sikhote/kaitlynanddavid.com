@@ -16,7 +16,7 @@ import { useForm } from '@mantine/form';
 import MiniSearch, { type SearchResult } from 'minisearch';
 import { useEffect, useMemo, useState } from 'react';
 import { events } from '@/lib/events';
-import { h2Props } from '@/lib/fonts';
+import { h2Props, h4Props } from '@/lib/fonts';
 import {
   getFinalForm,
   getFormFieldKey,
@@ -92,7 +92,7 @@ export default function Page() {
   }, [finalForm.setValues, finalForm.clearErrors, record]);
 
   // useEffect(() => {
-  //   searchForm.setFieldValue('name', 'Kathryn Holt');
+  //   searchForm.setFieldValue('name', 'David Sinclair');
   //   onSearch();
   // }, []);
   // useEffect(() => {
@@ -212,7 +212,7 @@ export default function Page() {
             <form onSubmit={onFinalSubmit} style={{ width: '100%' }}>
               <Flex direction="column" gap={{ base: 'lg' }} mx="auto">
                 <Title {...h2Props}>{events[0].date}</Title>
-                <Title order={4}>Please fill out all fields</Title>
+                <Title {...h4Props}>Please fill out all fields</Title>
                 <Flex
                   direction="column"
                   component="ul"

@@ -1,6 +1,7 @@
 'use client';
 
 import { Flex, Text, Title } from '@mantine/core';
+import { h4Props } from '@/lib/fonts';
 
 export default function Page() {
   return (
@@ -13,27 +14,27 @@ export default function Page() {
       ta="center"
     >
       <li>
-        <Title order={4}>What is the attire for the wedding?</Title>
+        <Title {...h4Props}>What is the attire for the wedding?</Title>
         <Text textWrap="balance" maw={600} w="100%">
           Cocktail! We’d love to see our family and friends dress up with us.
         </Text>
       </li>
       <li>
-        <Title order={4}>Is the wedding outdoors?</Title>
+        <Title {...h4Props}>Is the wedding outdoors?</Title>
         <Text textWrap="balance" maw={600} w="100%">
           Our ceremony will take place on a grassy lawn near La Jolla shores.
           Cocktail hour and dinner will be indoors.
         </Text>
       </li>
       <li>
-        <Title order={4}>How is the weather in early November?</Title>
+        <Title {...h4Props}>How is the weather in early November?</Title>
         <Text textWrap="balance" maw={600} w="100%">
           Typically, daytime highs range from the mid-60s to low 70s°F, dropping
           into the low-to-mid 50s°F at night.
         </Text>
       </li>
       <li>
-        <Title order={4}>Where should I park?</Title>
+        <Title {...h4Props}>Where should I park?</Title>
         <Text textWrap="balance" maw={600} w="100%">
           For our ceremony at the wedding bowl you can park in the surrounding
           streets. It shouldn't be too busy on a Tuesday afternoon but it is
@@ -48,7 +49,7 @@ export default function Page() {
         </Text>
       </li>
       <li>
-        <Title order={4}>
+        <Title {...h4Props}>
           Is dinner served to the table or is it buffet style?
         </Title>
         <Text textWrap="balance" maw={600} w="100%">
@@ -56,7 +57,7 @@ export default function Page() {
         </Text>
       </li>
       <li>
-        <Title order={4}>When should I RSVP by?</Title>
+        <Title {...h4Props}>When should I RSVP by?</Title>
         <Text textWrap="balance" maw={600} w="100%">
           October 1st!
         </Text>

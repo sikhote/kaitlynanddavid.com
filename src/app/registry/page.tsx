@@ -1,6 +1,7 @@
 'use client';
 
 import { Box, Button, Flex, Grid, Paper, Text, Title } from '@mantine/core';
+import { h4Props } from '@/lib/fonts';
 
 export default function Page() {
   return (
@@ -31,10 +32,10 @@ export default function Page() {
             linkLabel: 'View Registry',
           },
         ].map(({ title, description, href, linkLabel }, i) => (
-          <Grid.Col span={i === 0 ? 12 : 6} key={href}>
+          <Grid.Col span={{ base: 12, xs: i === 0 ? 12 : 6 }} key={href}>
             <Paper component="li" withBorder>
               <Box p="lg">
-                <Title order={4}>{title}</Title>
+                <Title {...h4Props}>{title}</Title>
                 {description && <Text>{description}</Text>}
               </Box>
               <Button component="a" fullWidth href={href} target="_blank">

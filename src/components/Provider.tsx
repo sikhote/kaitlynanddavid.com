@@ -32,7 +32,7 @@ const theme = createTheme({
       h2: {
         fontWeight: '300',
         fontSize: '1.5rem',
-        lineHeight: 'calc(2rem * 1.3)',
+        lineHeight: 'calc(1.5rem * 1.3)',
       },
       h3: {
         fontWeight: '100',

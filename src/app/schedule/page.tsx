@@ -2,7 +2,7 @@
 
 import { Anchor, Box, Flex, Text, Title } from '@mantine/core';
 import { events } from '@/lib/events';
-import { h2Props } from '@/lib/fonts';
+import { h2Props, h4Props } from '@/lib/fonts';
 
 export default function Page() {
   return (
@@ -19,7 +19,7 @@ export default function Page() {
                 {title}
               </Title>
               <Anchor underline="hover" href={website} mt={{ base: 'xl' }}>
-                <Title order={4}>{location}</Title>
+                <Title {...h4Props}>{location}</Title>
               </Anchor>
               <Text>
                 {times.map((time) => (
