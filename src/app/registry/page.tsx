@@ -5,12 +5,18 @@ import { Box, Button, Flex, Grid, Paper, Text, Title } from '@mantine/core';
 export default function Page() {
   return (
     <Flex gap={{ base: 'xl' }} direction="column" ta="center" align="center">
-      <Text>Thanks for considering a gift for us!</Text>
-      <Grid gap={{ base: 'xl' }} component="ul" w="100%" maw={400}>
+      <Text w="100%" maw={650}>
+        Your love and support mean the world to us. If you'd like to help us
+        start our next chapter, we've put together a few nice ways to do so
+        below. Thank you for helping us build a home full of love, laughter, and
+        fun in the kitchen.
+      </Text>
+      <Grid gap={{ base: 'xl' }} component="ul" w="100%" maw={600}>
         {[
           {
             title: 'Honeymoon Fund',
-            description: 'We are planning a trip to Italy next year',
+            description:
+              "We've added a Honeymoon Fund to our registry as we get ready for our first big adventure post wedding - a trip to Italy, a place neither of us has explored before. If you'd like you can help us make the most of our trip with unforgettable dinners and moments of discovery as we travel across the country. Thank you for helping us build memories we'll treasure forever.",
             href: 'https://paypal.me/kaitlynanddavid',
             linkLabel: 'Donate to Fund',
           },
