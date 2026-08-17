@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { Flex, Text, Title } from '@mantine/core';
+import { Flex, Text, Title } from "@mantine/core";
 
 export default function Page() {
   return (
     <Flex
       component="ul"
       direction="column"
-      gap={{ base: 'xl' }}
-      pt={{ base: 'lg' }}
+      gap={{ base: "xl" }}
+      pt={{ base: "lg" }}
       align="center"
       ta="center"
     >
@@ -26,25 +26,17 @@ export default function Page() {
         </Text>
       </li>
       <li>
-        <Title order={4}>How's the weather in early November?</Title>
+        <Title order={4}>How is the weather in early November?</Title>
         <Text textWrap="balance" maw={600} w="100%">
           Typically, daytime highs range from the mid-60s to low 70s°F, dropping
           into the low-to-mid 50s°F at night.
         </Text>
       </li>
       <li>
-        <Title order={4}>
-          Is dinner served to the table or is it a buffet style?
-        </Title>
-        <Text textWrap="balance" maw={600} w="100%">
-          Table service!
-        </Text>
-      </li>
-      <li>
         <Title order={4}>Where should I park?</Title>
         <Text textWrap="balance" maw={600} w="100%">
           For our ceremony at the wedding bowl you can park in the surrounding
-          streets. It shouldn’t be too busy on a Tuesday afternoon but it is
+          streets. It shouldn't be too busy on a Tuesday afternoon but it is
           near the beach and parking can be limited. You may need to walk a
           block or two.
           <br />
@@ -53,6 +45,14 @@ export default function Page() {
           in front of the restaurant with available parking. Additional parking
           can be found in the surrounding streets. We recommend carpooling when
           possible.
+        </Text>
+      </li>
+      <li>
+        <Title order={4}>
+          Is dinner served to the table or is it buffet style?
+        </Title>
+        <Text textWrap="balance" maw={600} w="100%">
+          Table service!
         </Text>
       </li>
       <li>
