@@ -15,30 +15,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
+import Registry from '@/components/Registry';
 import { h1Props, sans2Props } from '@/lib/fonts';
 
+const registryPage = { href: '/registry', label: 'Registry', title: undefined };
 const pages = [
   {
     href: '/',
     label: 'Home',
     title: 'Welcome to our wedding website!',
   },
-  {
-    href: '/schedule',
-    label: 'Schedule',
-  },
-  {
-    href: '/rsvp',
-    label: 'RSVP',
-  },
-  {
-    href: '/faq',
-    label: 'FAQ',
-  },
-  {
-    href: '/registry',
-    label: 'Registry',
-  },
+  { href: '/schedule', label: 'Schedule' },
+  { href: '/rsvp', label: 'RSVP' },
+  { href: '/faq', label: 'FAQ' },
+  registryPage,
 ];
 
 const nameProps = {
@@ -59,7 +49,13 @@ const andProps = {
   ml: { base: 8, xs: 12, sm: 22 } as const,
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+  children,
+  isRegistrySubdomain,
+}: {
+  children: React.ReactNode;
+  isRegistrySubdomain: boolean;
+}) {
   const pathname = usePathname();
   const [opened, { toggle, close }] = useDisclosure(false);
   const items = useMemo(
@@ -108,7 +104,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Title {...andProps}>And</Title>
             <Title {...nameProps}>David</Title>
           </Flex>
-          {!isAuth && (
+          {!isAuth && !isRegistrySubdomain && (
             <Burger
               opened={opened}
               onClick={toggle}
@@ -123,35 +119,39 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </Flex>
         {!isAuth && (
           <>
-            <Drawer
-              opened={opened}
-              onClose={close}
-              size="100%"
-              padding="md"
-              hiddenFrom="xs"
-              zIndex={1000000}
-            >
-              <Flex
-                component="ul"
-                top={0}
-                pt="md"
-                pl="sm"
-                style={{ position: 'absolute', zIndex: 1001 }}
-                direction="column"
-                gap="sm"
-              >
-                {items}
-              </Flex>
-            </Drawer>
-            <Box
-              component="nav"
-              visibleFrom="xs"
-              mt={{ base: 'md', xs: 'sm', sm: 'lg' }}
-            >
-              <Flex component="ul" gap={{ base: 'lg' }}>
-                {items}
-              </Flex>
-            </Box>
+            {!isRegistrySubdomain && (
+              <>
+                <Drawer
+                  opened={opened}
+                  onClose={close}
+                  size="100%"
+                  padding="md"
+                  hiddenFrom="xs"
+                  zIndex={1000000}
+                >
+                  <Flex
+                    component="ul"
+                    top={0}
+                    pt="md"
+                    pl="sm"
+                    style={{ position: 'absolute', zIndex: 1001 }}
+                    direction="column"
+                    gap="sm"
+                  >
+                    {items}
+                  </Flex>
+                </Drawer>
+                <Box
+                  component="nav"
+                  visibleFrom="xs"
+                  mt={{ base: 'md', xs: 'sm', sm: 'lg' }}
+                >
+                  <Flex component="ul" gap={{ base: 'lg' }}>
+                    {items}
+                  </Flex>
+                </Box>
+              </>
+            )}
             <Flex
               align="center"
               w="100%"
@@ -190,14 +190,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {page && (
           <Title
             ta="center"
-            {...(isHome
+            {...(isHome && !isRegistrySubdomain
               ? { order: 2, pb: { base: 'sm' }, fw: 800 }
               : { ...sans2Props, ...h1Props })}
           >
-            {page.title || page.label}
+            {isRegistrySubdomain
+              ? registryPage.label
+              : page.title || page.label}
           </Title>
         )}
-        {children}
+        {isRegistrySubdomain ? <Registry /> : children}
       </Flex>
     </Flex>
   );

@@ -4,18 +4,24 @@ import Layout from '@/components/Layout';
 import { cursive, sans, sans2 } from '@/lib/fonts';
 import '@mantine/core/styles.css';
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
+import { headers } from 'next/headers';
 import Provider from '@/components/Provider';
+import { getIsRegistrySubdomain } from '@/lib/registry';
 
 export const metadata: Metadata = {
   title: 'Kaitlyn & David',
   description: 'The wedding website for Kaitlyn Holt & David Sinclair.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const host = headersList.get('x-forwarded-host') || headersList.get('host');
+  console.log({ host });
+
   return (
     <html
       lang="en"
@@ -29,7 +35,9 @@ export default function RootLayout({
       </head>
       <body>
         <Provider>
-          <Layout>{children}</Layout>
+          <Layout isRegistrySubdomain={getIsRegistrySubdomain(host)}>
+            {children}
+          </Layout>
         </Provider>
       </body>
     </html>
