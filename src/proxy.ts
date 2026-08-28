@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 
 export function proxy(request: NextRequest) {
   if (
+    request.nextUrl.hostname === 'registry.kaitlynanddavid.com' ||
     request.nextUrl.pathname === '/auth' ||
     request.nextUrl.pathname === '/api/auth'
   ) {
