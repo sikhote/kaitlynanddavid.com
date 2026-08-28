@@ -21,7 +21,7 @@ export const parties: Party[] = [
   ['Julia Sinclair-Palm', 'Carly Boyce'],
   ['Chris Knowlton', 'Tiffany Knowlton', 'Emma Knowlton'],
   ['John Mooney'],
-  ['Kylie Martin', 'Travis Martin'],
+  ['Kylee Martin', 'Travis Martin'],
   ['Liz Landram'],
   ['Lois Knowlton'],
   ['Mike Sciotti', 'Valerie Sciotti'],
