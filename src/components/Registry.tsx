@@ -6,18 +6,16 @@ import { h4Props } from '@/lib/fonts';
 export default function Registry() {
   return (
     <Flex gap={{ base: 'xl' }} direction="column" ta="center" align="center">
-      <Text w="100%" maw={650}>
-        Your love and support mean the world to us. If you'd like to help us
-        start our next chapter, we've put together a few nice ways to do so
-        below. Thank you for helping us build a home full of love, laughter, and
-        fun in the kitchen.
-      </Text>
-      <Grid gap={{ base: 'xl' }} component="ul" w="100%" maw={600}>
+      <Grid
+        gap={{ base: 'xl' }}
+        component="ul"
+        w="100%"
+        maw={600}
+        mt={{ base: 'lg' }}
+      >
         {[
           {
             title: 'Honeymoon Fund',
-            description:
-              "We've added a Honeymoon Fund to our registry as we get ready for our first big adventure post wedding - a trip to Italy, a place neither of us has explored before. If you'd like you can help us make the most of our trip with unforgettable dinners and moments of discovery as we travel across the country. Thank you for helping us create memories we'll treasure forever.",
             href: 'https://www.honeyfund.com/site/kaitlynanddavid',
             linkLabel: 'Donate to Fund',
           },
@@ -31,12 +29,11 @@ export default function Registry() {
             href: 'https://www.potterybarn.com/registry/7kvpjzsqgz/registry-list.html',
             linkLabel: 'View Registry',
           },
-        ].map(({ title, description, href, linkLabel }, i) => (
+        ].map(({ title, href, linkLabel }, i) => (
           <Grid.Col span={{ base: 12, xs: i === 0 ? 12 : 6 }} key={href}>
             <Paper component="li" withBorder>
               <Box p="lg">
                 <Title {...h4Props}>{title}</Title>
-                {description && <Text>{description}</Text>}
               </Box>
               <Button component="a" fullWidth href={href} target="_blank">
                 {linkLabel}
