@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Flex, Grid, Paper, Text, Title } from '@mantine/core';
+import { Box, Button, Flex, Grid, Paper, Title } from '@mantine/core';
 import { h4Props } from '@/lib/fonts';
 
 export default function Registry() {
