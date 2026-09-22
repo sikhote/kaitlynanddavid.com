@@ -32,4 +32,5 @@ export const parties: Party[] = [
   ['Maryann Mohns', 'Craig Mohns'],
   ['Victoria Muschek', 'Bob Muschek'],
   ['Mary Ball', 'Jim Ball'],
+  ['Kerry Keyser', 'Shelly Keyser'],
 ];
