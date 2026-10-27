@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import { Flex, Text, Title } from '@mantine/core';
-import { h4Props } from '@/lib/fonts';
+import { Flex, Text, Title, Box } from "@mantine/core";
+import { h4Props } from "@/lib/fonts";
+import Image from "next/image";
 
 export default function Page() {
   return (
     <Flex
       component="ul"
       direction="column"
-      gap={{ base: 'xl' }}
-      pt={{ base: 'lg' }}
+      gap={{ base: "xl" }}
+      pt={{ base: "lg" }}
       align="center"
       ta="center"
     >
@@ -35,7 +36,7 @@ export default function Page() {
       </li>
       <li>
         <Title {...h4Props}>Where should I park?</Title>
-        <Text textWrap="balance" maw={600} w="100%">
+        <Text textWrap="balance" maw={600} w="100%" component="div">
           For our ceremony at the wedding bowl you can park in the surrounding
           streets. It shouldn't be too busy on a Tuesday afternoon but it is
           near the beach and parking can be limited. You may need to walk a
@@ -46,6 +47,25 @@ export default function Page() {
           in front of the restaurant with available parking. Additional parking
           can be found in the surrounding streets. We recommend carpooling when
           possible.
+          <br />
+          <br />
+          <Image
+            src="/assets/ceremony-parking.avif"
+            alt="Ceremony Parking"
+            width={0}
+            height={0}
+            sizes="600px"
+            style={{ width: "100%", height: "auto" }}
+          />
+          <br />
+          <Image
+            src="/assets/ceremony-site.avif"
+            alt="Ceremony Site"
+            width={0}
+            height={0}
+            sizes="600px"
+            style={{ width: "100%", height: "auto" }}
+          />
         </Text>
       </li>
       <li>
