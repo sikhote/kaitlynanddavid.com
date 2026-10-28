@@ -1,5 +1,4 @@
 import DinnerIcon from '@/components/icons/DinnerIcon';
-// import FamilyIcon from '@/components/icons/FamilyIcon';
 import WeddingIcon from '@/components/icons/WeddingIcon';
 import type { Event } from '@/lib/types';
 
@@ -20,7 +19,13 @@ export const events: Event[] = [
   {
     title: 'Reception',
     date: 'Tuesday, November 3, 2026',
-    times: ['4:00 pm - Cocktail hour', '5:00 pm - Dinner'],
+    times: [
+      '4:00 pm - Cocktail hour',
+      '5:00 pm - First dance and parent dances',
+      '5:30 - Entrées served',
+      '6:30 - Toast',
+      '6:45 - Cake cutting',
+    ],
     location: 'The Marine Room',
     website: 'https://www.marineroom.com',
     address: '1950 Spindrift Dr, La Jolla, CA 92037',
@@ -33,6 +38,6 @@ export const events: Event[] = [
       },
     ],
     description:
-      'Join us for cocktails, dinner, and cake as we watch the waves roll in.',
+      'Join us for cocktails, dinner, and cake as we watch the waves roll in. ',
   },
 ];

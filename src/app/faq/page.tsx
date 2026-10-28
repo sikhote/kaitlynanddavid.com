@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { Flex, Text, Title, Box } from "@mantine/core";
-import { h4Props } from "@/lib/fonts";
-import Image from "next/image";
+import { Flex, Text, Title } from '@mantine/core';
+import Image from 'next/image';
+import { h4Props } from '@/lib/fonts';
 
 export default function Page() {
   return (
     <Flex
       component="ul"
       direction="column"
-      gap={{ base: "xl" }}
-      pt={{ base: "lg" }}
+      gap={{ base: 'xl' }}
+      pt={{ base: 'lg' }}
       align="center"
       ta="center"
     >
@@ -55,7 +55,7 @@ export default function Page() {
             width={0}
             height={0}
             sizes="600px"
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: '100%', height: 'auto' }}
           />
           <br />
           <Image
@@ -64,7 +64,7 @@ export default function Page() {
             width={0}
             height={0}
             sizes="600px"
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: '100%', height: 'auto' }}
           />
         </Text>
       </li>

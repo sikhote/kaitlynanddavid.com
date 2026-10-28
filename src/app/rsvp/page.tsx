@@ -27,8 +27,8 @@ import { parties } from '@/lib/parties';
 
 export default function Page() {
   const [status, setStatus] = useState<
-    'idle' | 'loading' | 'success' | 'error'
-  >('idle');
+    'idle' | 'loading' | 'success' | 'error' | 'expired'
+  >('expired');
   const miniSearch = useMemo(() => {
     const items = parties.map((party, i) => ({ id: i, names: party }));
     const _miniSearch = new MiniSearch({
@@ -91,18 +91,14 @@ export default function Page() {
     finalForm.clearErrors();
   }, [finalForm.setValues, finalForm.clearErrors, record]);
 
-  // useEffect(() => {
-  //   searchForm.setFieldValue('name', 'David Sinclair');
-  //   onSearch();
-  // }, []);
-  // useEffect(() => {
-  //   if (results) {
-  //     setRecord(results[0]);
-  //   }
-  // }, [results]);
-
   return (
     <Flex direction="column" ta="center" align="center" w="100%">
+      {status === 'expired' && (
+        <Text maw={400} textWrap="balance" mt={{ base: 'lg' }}>
+          Thank you so much for your RSVP. We cannot wait to see you there in
+          person or in spirit!
+        </Text>
+      )}
       {status === 'error' && (
         <>
           <Title

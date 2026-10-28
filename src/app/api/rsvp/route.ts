@@ -19,8 +19,6 @@ export async function POST(request: Request) {
 
     html += '<br />';
 
-    // return NextResponse.json({ success: true });
-
     const resendResponse = await resend.emails.send({
       from: 'Wedding RSVP <rsvp@kaitlynanddavid.com>',
       to: ['david@sinclair.tech', 'keholt22@gmail.com'],
